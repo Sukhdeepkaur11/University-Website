@@ -4,7 +4,7 @@ const { createToken } = require("./auth");
 const storeUser = async (userData) => {
   try {
     const password = await bcrypt.hashSync(userData.password, 10);
-    const user = new userModel({
+    const user = new userModel({git push -u origin main
       ...userData,
       password,
     });

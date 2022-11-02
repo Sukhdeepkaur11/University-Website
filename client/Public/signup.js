@@ -29,9 +29,8 @@ const handelSignup = async () => {
             },
             body: JSON.stringify({
                 password: formValue.pass1,
-                name: formValue.fname+  ,
-                email: formValue.email+formValue.lname,
-                course: formValue.course,
+                name: formValue.fname + formValue.lname, 
+                email: formValue.email,
             }) 
         });
         console.log(response)
