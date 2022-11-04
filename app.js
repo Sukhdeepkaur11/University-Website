@@ -9,6 +9,7 @@ const { auth } = require("./users_module/auth");
 
 const app = express(); // creating an express app, an object that contains all of the express logic
 const port = 3000; // port, hard coded number of the port we want express to look into
+console.log("inside app.js");
 
 app.engine("handlebars", engine());
 app.set("views", "./views");
