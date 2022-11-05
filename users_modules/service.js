@@ -1,10 +1,10 @@
 const userModel = require("./model.js");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const { createToken } = require("./auth");
 const storeUser = async (userData) => {
   try {
     const password = await bcrypt.hashSync(userData.password, 10);
-    const user = new userModel({git push -u origin main
+    const user = new userModel({git push -u origin main,
       ...userData,
       password,
     });

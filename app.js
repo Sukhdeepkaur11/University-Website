@@ -3,9 +3,9 @@ const path = require("path"); // path is a built in library, gives functions tha
 const bodyParser = require("body-parser"); // it parses the body of HTTP request to a JS object that we can use
 const { engine } = require("express-handlebars"); // bring in handelbars function
 const { getConnection } = require("./db/db"); // our data base driver
-const userService = require("./users_module/service");
+const userService = require("../users_module/service");
 const cookieParser = require("cookie-parser");
-const { auth } = require("./users_module/auth");
+const { auth } = require("../users_module/auth");
 
 const app = express(); // creating an express app, an object that contains all of the express logic
 const port = 3000; // port, hard coded number of the port we want express to look into
@@ -18,7 +18,7 @@ app.set("view engine", "handlebars"); // tell express we want to use handelbars 
 //     layoutsDir: __dirname + '/views/layouts',
 // })); // set the templating engine to handelbars and tell handel bars where to find the templates/layouts
 
-app.use(express.static(path.join(__dirname, "./client/public"))); // for every request, include these static files in the response
+app.use(express.static(path.join(__dirname, "../client/public"))); // for every request, include these static files in the response
 app.use(bodyParser.json()); // we want to use body-parses as a middelware
 app.use(cookieParser());
 
@@ -26,12 +26,12 @@ app.use(cookieParser());
 app.get("/", (req, res) => {
   console.log("accessing route /, METHOD = GET");
   // __dirname, is a nodejs built in variable representing the current directory where code is ran
-  res.sendFile(path.join(__dirname, "/client/index.html")); // responding to a request with a file
+  res.sendFile(path.join(__dirname, "../client/index.html")); // responding to a request with a file
 });
 
 app.get("/login", (req, res) => {
   console.log("accessing route /login, METHOD = GET");
-  res.sendFile(path.join(__dirname, "/client/login.html"));
+  res.sendFile(path.join(__dirname, "../client/login.html"));
 });
 
 app.post("/login", async (req, res) => {
@@ -69,7 +69,7 @@ app.post("/login", async (req, res) => {
 });
 
 app.get("/signup", (req, res) => {
-  res.sendFile(path.join(__dirname, "/client/signup.html"));
+  res.sendFile(path.join(__dirname, "../client/signup.html"));
 });
 
 app.post("/signup", async (req, res) => {
