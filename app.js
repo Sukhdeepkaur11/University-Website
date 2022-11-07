@@ -1,26 +1,26 @@
 const express = require("express"); // brining express js code so that we can use it
 const path = require("path"); // path is a built in library, gives functions that can work with file system
 const bodyParser = require("body-parser"); // it parses the body of HTTP request to a JS object that we can use
-const { engine } = require("express-handlebars"); // bring in handelbars function
-const { getConnection } = require("./db/db"); // our data base driver
-const userService = require("../users_module/service");
-const cookieParser = require("cookie-parser");
-const { auth } = require("../users_module/auth");
+// const { engine } = require("express-handlebars"); // bring in handelbars function
+// const { getConnection } = require("./db/db"); // our data base driver
+// const userService = require("../users_module/service");
+//const cookieParser = require("cookie-parser");
+// const { auth } = require("../users_module/auth");
 
 const app = express(); // creating an express app, an object that contains all of the express logic
 const port = 3000; // port, hard coded number of the port we want express to look into
 console.log("inside app.js");
 
-app.engine("handlebars", engine());
-app.set("views", "./views");
-app.set("view engine", "handlebars"); // tell express we want to use handelbars as our engine
-// app.engine('handlebars', handlebars({
-//     layoutsDir: __dirname + '/views/layouts',
-// })); // set the templating engine to handelbars and tell handel bars where to find the templates/layouts
+// app.engine("handlebars", engine());
+// app.set("views", "./views");
+// app.set("view engine", "handlebars"); // tell express we want to use handelbars as our engine
+// // app.engine('handlebars', handlebars({
+// //     layoutsDir: __dirname + '/views/layouts',
+// // })); // set the templating engine to handelbars and tell handel bars where to find the templates/layouts
 
 app.use(express.static(path.join(__dirname, "../client/public"))); // for every request, include these static files in the response
 app.use(bodyParser.json()); // we want to use body-parses as a middelware
-app.use(cookieParser());
+//app.use(cookieParser());
 
 /* defining routes */
 app.get("/", (req, res) => {
@@ -88,43 +88,42 @@ app.post("/signup", async (req, res) => {
   });
 });
 
-app.get("/user/:email", (req, res) => {
-  const user = userService.getUser(req.params.email);
-  res.render("profile", {
-    layout: "profile",
-    name: user.name,
-    email: user.email,
-    course: user.course,
-    address: user.address,
-    dob: user.dob,
-    bio: user.bio,
-  });
-});
+// app.get("/user/:email", (req, res) => {
+//   const user = userService.getUser(req.params.email);
+//   res.render("profile", {
+//     layout: "profile",
+//     name: user.name,
+//     email: user.email,
+//     address: user.address,
+//     dob: user.dob,
+//     bio: user.bio,
+//   });
+// });
 
-app.get("/dashboard", auth, async (req, res) => {
-  try {
-    const user = await userService.getUserById(req.userId);
-    res.render("dashboard", {
-      layout: "profile",
-      name: user.name,
-      email: user.email,
-      course: user.course,
-      address: user.address,
-      dob: user.dob,
-      bio: user.bio,
-    });
-  } catch (error) {
-    res.redirect("/login");
-    res.end();
-    return;
-  }
-});
+// app.get("/dashboard", auth, async (req, res) => {
+//   try {
+//     const user = await userService.getUserById(req.userId);
+//     res.render("dashboard", {
+//       layout: "profile",
+//       name: user.name,
+//       email: user.email,
+//       course: user.course,
+//       address: user.address,
+//       dob: user.dob,
+//       bio: user.bio,
+//     });
+//   } catch (error) {
+//     res.redirect("/login");
+//     res.end();
+//     return;
+//   }
+// });
 
 // telling express to start listening on the given port (first parameter), when its listening it will
 // run the next call back
 app.listen(port, async () => {
   console.log("Listening on port: " + port);
-  await getConnection();
+  //await getConnection();
   console.log("connected to DB");
 });
 

@@ -3,20 +3,24 @@ const login = async (event) => {
   const formData = {
     email: document.getElementById("emailInput").value,
     password: document.getElementById("passwordInput").value,
+    console.log(email);
+    console.log(password);
   };
-  const response = await fetch("/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  });
-  console.log(response);
-  if (response.status === 200) {
-    window.location = "/dashboard";
-  }
-};
+
+//   const response = await fetch("/login", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(formData),
+//   });
+//   console.log(response);
+//   if (response.status === 200) {
+//     window.location = "/dashboard";
+//   }
+// };
 
 const signInButton = document.getElementById("signInButton");
 
 signInButton.addEventListener("click", login);
+
