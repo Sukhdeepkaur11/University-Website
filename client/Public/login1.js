@@ -3,8 +3,6 @@ const login = async (event) => {
   const formData = {
     email: document.getElementById("emailInput").value,
     password: document.getElementById("passwordInput").value,
-    console.log(email);
-    console.log(password);
   };
 
 //   const response = await fetch("/login", {
@@ -22,5 +20,4 @@ const login = async (event) => {
 
 const signInButton = document.getElementById("signInButton");
 
-signInButton.addEventListener("click", login);
-
+signInButton.addEventListener("click", login)
