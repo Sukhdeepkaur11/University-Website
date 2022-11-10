@@ -10,7 +10,7 @@ const bodyParser = require("body-parser");
 // const { auth } = require("../users_module/auth");
 
 const app = express(); // creating an express app, an object that contains all of the express logic
-const port = 3000; // port, hard coded number of the port we want express to look into
+const port = 8484; // port, hard coded number of the port we want express to look into
 console.log("inside app.js");
 
 // app.engine("handlebars", engine());
@@ -19,7 +19,7 @@ console.log("inside app.js");
 // // app.engine('handlebars', handlebars({
 // //     layoutsDir: __dirname + '/views/layouts',
 // // })); // set the templating engine to handelbars and tell handel bars where to find the templates/layouts
-app.use(express.static(path.join(__dirname, 'client/public'))); // for every request, include these static files in the response
+app.use(express.static(path.join(__dirname, "client/public"))); // for every request, include these static files in the response
 app.use(bodyParser.json()); // we want to use body-parses as a middelware
 //app.use(cookieParser());
 
@@ -27,14 +27,13 @@ app.use(bodyParser.json()); // we want to use body-parses as a middelware
 app.get("/", (req, res) => {
   console.log("accessing route /, METHOD = GET");
   // __dirname, is a nodejs built in variable representing the current directory where code is ran
-  res.send("hello");
   res.sendFile(path.join(__dirname, "client/index.html")); // responding to a request with a file
 });
 
 app.get("/login", (req, res) => {
   console.log("accessing route /login, METHOD = GET");
   res.sendFile(path.join(__dirname, "client/login.html"));
-
+});
 
 //   try {
 //     // object destruction, taking fields out of an object as a variable
