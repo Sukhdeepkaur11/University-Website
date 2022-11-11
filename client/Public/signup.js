@@ -1,17 +1,8 @@
 const handelSignup = async () => {
   // read all the form information
   const formValue = {
-    fname: document.getElementById("firstname").value,
-    lname: document.getElementById("lastname").value,
-    position: document.getElementById("position").value,
+    name: document.getElementById("firstname").value,
     empid: document.getElementById("empid").value,
-    address: document.getElementById("address").value,
-    gender: document.getElementById("gender").checked,
-    state: document.getElementById("state").value,
-    city: document.getElementById("city").value,
-    dob: document.getElementById("dob").value,
-    pincode: document.getElementById("pincode").value,
-    mobile: document.getElementById("mobile").value,
     email: document.getElementById("emailId").value,
     pass1: document.getElementById("passId").value,
     pass2: document.getElementById("passIdRepeat").value,

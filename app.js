@@ -30,6 +30,36 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "client/index.html")); // responding to a request with a file
 });
 
+app.get("/about", (req, res) => {
+  console.log("accessing route /, METHOD = GET");
+  // __dirname, is a nodejs built in variable representing the current directory where code is ran
+  res.sendFile(path.join(__dirname, "client/about.html")); // responding to a request with a file
+});
+
+app.get("/blog", (req, res) => {
+  console.log("accessing route /, METHOD = GET");
+  // __dirname, is a nodejs built in variable representing the current directory where code is ran
+  res.sendFile(path.join(__dirname, "client/blog.html")); // responding to a request with a file
+});
+
+app.get("/contact", (req, res) => {
+  console.log("accessing route /, METHOD = GET");
+  // __dirname, is a nodejs built in variable representing the current directory where code is ran
+  res.sendFile(path.join(__dirname, "client/contact.html")); // responding to a request with a file
+});
+
+app.get("/course", (req, res) => {
+  console.log("accessing route /, METHOD = GET");
+  // __dirname, is a nodejs built in variable representing the current directory where code is ran
+  res.sendFile(path.join(__dirname, "client/course.html")); // responding to a request with a file
+});
+
+app.get("/loginstaff", (req, res) => {
+  console.log("accessing route /, METHOD = GET");
+  // __dirname, is a nodejs built in variable representing the current directory where code is ran
+  res.sendFile(path.join(__dirname, "client/loginstaff.html")); // responding to a request with a file
+});
+
 app.get("/login", (req, res) => {
   console.log("accessing route /login, METHOD = GET");
   res.sendFile(path.join(__dirname, "client/login.html"));
@@ -54,16 +84,16 @@ app.get("/login", (req, res) => {
 //   }
 // });
 
-// app.get("/signup", (req, res) => {
-//   res.sendFile(path.join(__dirname, "../client/signup.html"));
-// });
+app.get("/signup", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/signup.html"));
+});
 
 // app.post("/signup", async (req, res) => {
 //   try {
 //     await userService.storeUser(req.body);
-//   } catch (err) {
-//     res.status(err.code).json({
-//       error: err.msg,
+//   } catch (error) {
+//     res.status(error.code).json({
+//       error: error.msg,
 //     });
 //     return;
 //   }
@@ -114,4 +144,4 @@ app.listen(port, () => {
 });
 
 // exporting app so vercel can access it
-//module.exports = app
+module.exports = app;
