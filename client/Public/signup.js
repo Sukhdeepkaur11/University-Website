@@ -19,8 +19,10 @@ const handelSignup = async () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        password: formValue.pass1,
-        name: formValue.fname + formValue.lname,
+        pass1: formValue.pass1,
+        pass2: formValue.pass2,
+        empid: formValue.empid,
+        name: formValue.name,
         email: formValue.email,
       }),
     });
@@ -29,6 +31,8 @@ const handelSignup = async () => {
       const responseBody = await response.json();
       console.log(responseBody);
       showError(responseBody.error);
+    } else {
+      window.location = "/";
     }
   }
 };
@@ -50,10 +54,7 @@ const validateSignup = (formValue) => {
     return false;
   }
 
-  if (
-    (!formValue.fname && !formValue.lname) ||
-    (formValue.fname === "" && formValue.lname === "")
-  ) {
+  if (formValue.name === "" && formValue.name === "") {
     showError("Please tell us your name");
     return false;
   }
