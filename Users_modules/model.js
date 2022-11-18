@@ -12,6 +12,6 @@ const UserSchema = new Schema({
   rpassword: String,
 });
 
-const UserModel = new mongoose.model("todo-users", UserSchema);
+const UserModel = new mongoose.model("UserSchema");
 
 module.exports = UserModel;
