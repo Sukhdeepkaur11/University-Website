@@ -1,103 +1,111 @@
 const UserModel = require("./model");
-const bcrypt = require("bcryptjs");
-
-const create = async (user) => {
-  try {
-    // TODO: encrypt user password and store it.
-    const password = await bcrypt.hashSync(user.password, 10);
-    const userData = {
-      email: user.email,
-      password: password,
-    };
-    return await UserModel.create(userData);
-  } catch (error) {
-    console.log(error);
-    throw {
-      code: 401,
-      message: "Invalid User",
-    };
+//const bcrypt = require("bcryptjs");
+const storeUser = async {userData} =>{
+  const user = new UserModel(userData)
+  try{
+    await user.save()
+  }catch(err){
+    throw 'failed to create user'
   }
-};
+}
 
-const getOne = async (email) => {
-  try {
-    const user = await UserModel.findOne({
-      email: email,
-    });
+// const create = async (user) => {
+//   try {
+//     // encrypt user password and store it.
+//     const password = await bcrypt.hashSync(user.password, 10);
+//     const userData = {
+//       email: user.email,
+//       password: password,
+//     };
+//     return await UserModel.create(userData);
+//   } catch (error) {
+//     console.log(error);
+//     throw {
+//       code: 401,
+//       message: "Invalid User",
+//     };
+//   }
+// };
 
-    if (!user) {
-      throw "";
-    }
+// const getOne = async (email) => {
+//   try {
+//     const user = await UserModel.findOne({
+//       email: email,
+//     });
 
-    return user;
-  } catch (error) {
-    throw {
-      code: 401,
-      message: "couldnt find user",
-    };
-  }
-};
+//     if (!user) {
+//       throw "";
+//     }
 
-const getOneById = async (id) => {
-  try {
-    const user = await UserModel.findOne({
-      _id: id,
-    });
+//     return user;
+//   } catch (error) {
+//     throw {
+//       code: 401,
+//       message: "couldnt find user",
+//     };
+//   }
+// };
 
-    if (!user) {
-      throw "";
-    }
+// const getOneById = async (id) => {
+//   try {
+//     const user = await UserModel.findOne({
+//       _id: id,
+//     });
 
-    return user;
-  } catch (error) {
-    throw {
-      code: 401,
-      message: "couldnt find user",
-    };
-  }
-};
+//     if (!user) {
+//       throw "";
+//     }
 
-const getAll = async () => {
-  try {
-    const users = await UserModel.find({}).lean();
+//     return user;
+//   } catch (error) {
+//     throw {
+//       code: 401,
+//       message: "couldnt find user",
+//     };
+//   }
+// };
 
-    if (!users || users.length === 0) {
-      throw "";
-    }
+// const getAll = async () => {
+//   try {
+//     const users = await UserModel.find({}).lean();
 
-    return users;
-  } catch (error) {
-    throw {
-      code: 401,
-      message: "couldnt find any users",
-    };
-  }
-};
+//     if (!users || users.length === 0) {
+//       throw "";
+//     }
 
-const login = async (userDetails) => {
-  try {
-    const user = await getOne(userDetails.email);
-    const matches = await bcrypt.compare(userDetails.password, user.password);
-    if (!matches) {
-      throw {
-        code: 404,
-        message: "Invalid password",
-      };
-    }
+//     return users;
+//   } catch (error) {
+//     throw {
+//       code: 401,
+//       message: "couldnt find any users",
+//     };
+//   }
+// };
 
-    return user;
-  } catch (error) {
-    throw {
-      code: 404,
-      message: "Couldn't find user",
-    };
-  }
-};
+// const login = async (userDetails) => {
+//   try {
+//     const user = await getOne(userDetails.email);
+//     const matches = await bcrypt.compare(userDetails.password, user.password);
+//     if (!matches) {
+//       throw {
+//         code: 404,
+//         message: "Invalid password",
+//       };
+//     }
 
-module.exports = {
-  create,
-  getOne,
-  getAll,
-  login,
-  getOneById,
-};
+//     return user;
+//   } catch (error) {
+//     throw {
+//       code: 404,
+//       message: "Couldn't find user",
+//     };
+//   }
+// };
+module.exports = {storeUser}
+// module.exports = {
+//   create,
+//   getOne,
+//   getAll,
+//   login,
+//   getOneById,
+// };

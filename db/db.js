@@ -13,14 +13,12 @@ const getConnection = async () => {
   } else {
     console.log("creating new connection");
     connection = await mongoose.connect(
-      "mongodb+srv://bsukhi11:B@idwan01@cluster0.jzir3o1.mongodb.net/?retryWrites=true&w=majority"
+      "mongodb+srv://bsukhi11:Baidwan01@cluster0.jzir3o1.mongodb.net/test"
     );
     return connection;
   }
 };
 
-module.exports = {
-  getConnection,
-  mongoose,
-  Schema: mongoose.Schema,
-};
+module.exports = getConnection;
+//mongoose,
+//Schema: mongoose.Schema,

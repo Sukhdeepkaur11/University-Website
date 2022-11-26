@@ -1,11 +1,12 @@
+const { json } = require("express");
 const express = require("express"); // brining express js code so that we can use it
 const path = require("path"); // path is a built in library, gives functions that can work with file system
 const bodyParser = require("body-parser");
 
 // it parses the body of HTTP request to a JS object that we can use
 // const { engine } = require("express-handlebars"); // bring in handelbars function
-// const { getConnection } = require("./db/db"); // our data base driver
-// const userService = require("../users_module/service");
+const { getConnection } = require("./db/db.js"); // our data base driver
+const userService = require("./Users_module/service.js");
 //const cookieParser = require("cookie-parser");
 // const { auth } = require("../users_module/auth");
 
@@ -22,6 +23,13 @@ console.log("inside app.js");
 app.use(express.static(path.join(__dirname, "client/public"))); // for every request, include these static files in the response
 app.use(bodyParser.json()); // we want to use body-parses as a middelware
 //app.use(cookieParser());
+// const students = [];
+// app.use((req, res, next) => {
+//   console.log("arequest came in middleware");
+//   console.log(req.path);
+//   console.log(req.method);
+//   next();
+// });
 
 /* defining routes */
 app.get("/", (req, res) => {
@@ -87,8 +95,40 @@ app.get("/login", (req, res) => {
 app.get("/signup", (req, res) => {
   res.sendFile(path.join(__dirname, "client/signup.html"));
 });
+// app.post("/login", async (req, res) => {
+//   console.log("we are in login");
+//   console.log(req.body);
+//   const userInfo = req.body;
+//   let loggedIn = false;
+//   await students.map((student) => {
+//     if (
+//       student.email === userInfo.email &&
+//       student.password === userInfo.password
+//     ) {
+//       loggedIn = true;
+//     }
+//   });
+//   res.json({
+//     loggedIn,
+//   });
+// });
 
-// app.post("/signup", async (req, res) => {
+app.post("/signup", async (req, res) => {
+  console.log("we got new user");
+  console.log(req.body);
+  try{
+  await userService.storeUser(req.body);
+  }catch(err){
+    res.status(400).json({
+      error:err
+    }) return res.json();
+  }
+  res.status(200).json({
+    message: "user created successfully",
+  });
+ 
+});
+//students.push(req.body);
 //   try {
 //     await userService.storeUser(req.body);
 //   } catch (error) {
@@ -99,9 +139,12 @@ app.get("/signup", (req, res) => {
 //   }
 //   // res.status, sets the status of the response
 //   // json will send json data as the response body
-//   res.status(200).json({
-//     message: "user created sucessfully",
-//   });
+// res.json({
+//   message: "user created sucessfully",
+// });
+
+// app.get("/students", (req, res) => {
+//   res.json(students);
 // });
 
 // app.get("/user/:email", (req, res) => {
@@ -137,11 +180,11 @@ app.get("/signup", (req, res) => {
 
 // telling express to start listening on the given port (first parameter), when its listening it will
 // run the next call back
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log("Listening on port: " + port);
-  //await getConnection();
+  await getConnection();
   console.log("connected to DB");
 });
 
 // exporting app so vercel can access it
-module.exports = app;
+//module.exports = app;
