@@ -5,8 +5,8 @@ const bodyParser = require("body-parser");
 
 // it parses the body of HTTP request to a JS object that we can use
 // const { engine } = require("express-handlebars"); // bring in handelbars function
-const { getConnection } = require("./db/db.js"); // our data base driver
-const userService = require("./Users_module/service.js");
+const getConnection = require("./db/db.js"); // our data base driver
+const userService = require("./Users_modules/service");
 //const cookieParser = require("cookie-parser");
 // const { auth } = require("../users_module/auth");
 
@@ -116,17 +116,16 @@ app.get("/signup", (req, res) => {
 app.post("/signup", async (req, res) => {
   console.log("we got new user");
   console.log(req.body);
-  try{
-  await userService.storeUser(req.body);
-  }catch(err){
+  try {
+    await userService.storeUser(req.body);
+    res.status(200).json({
+      message: "user created successfully",
+    });
+  } catch (err) {
     res.status(400).json({
-      error:err
-    }) return res.json();
+      error: err,
+    });
   }
-  res.status(200).json({
-    message: "user created successfully",
-  });
- 
 });
 //students.push(req.body);
 //   try {

@@ -1,9 +1,6 @@
-//const { Schema } = require("mongoose");
+const mongoose = require("mongoose");
 
-//const { mongoose, Schema } = require("../db/db");
-const { getConnection, Schema, mongoose } = require("../db/db");
-const mongoose = getConnection();
-const UserSchema = new Schema({
+const UserSchema = new mongoose.Schema({
   name: String,
   empId: String,
   email: {
@@ -15,6 +12,6 @@ const UserSchema = new Schema({
   rpassword: String,
 });
 
-const userModel = new mongoose.model("users", UserSchema);
+const UserModel = new mongoose.model("users", UserSchema);
 
 module.exports = UserModel;
