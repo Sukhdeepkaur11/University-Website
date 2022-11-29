@@ -15,10 +15,14 @@ const getConnection = async () => {
     connection = await mongoose.connect(
       "mongodb+srv://bsukhi11:Baidwan01@cluster0.jzir3o1.mongodb.net/University_Website"
     );
+    //"mongodb+srv://bsukhi11:Baidwan01@cluster0.jzir3o1.mongodb.net/University_Website"
+
     return connection;
   }
 };
 
-module.exports = getConnection;
-//mongoose,
-//Schema: mongoose.Schema,
+module.exports = {
+  getConnection,
+  mongoose,
+  Schema: mongoose.Schema,
+};

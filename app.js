@@ -2,17 +2,21 @@ const { json } = require("express");
 const express = require("express"); // brining express js code so that we can use it
 const path = require("path"); // path is a built in library, gives functions that can work with file system
 const bodyParser = require("body-parser");
-
-// it parses the body of HTTP request to a JS object that we can use
-// const { engine } = require("express-handlebars"); // bring in handelbars function
-const getConnection = require("./db/db.js"); // our data base driver
-const userService = require("./Users_modules/service");
-//const cookieParser = require("cookie-parser");
-// const { auth } = require("../users_module/auth");
-
+const { getConnection } = require("./db/db.js"); // our data base driver
+const userService = require("./user_module/service.js");
 const app = express(); // creating an express app, an object that contains all of the express logic
 const port = 8484; // port, hard coded number of the port we want express to look into
 console.log("inside app.js");
+// it parses the body of HTTP request to a JS object that we can use
+// const { engine } = require("express-handlebars"); // bring in handelbars function
+
+//const cookieParser = require("cookie-parser");
+// const { auth } = require("../users_module/auth");
+
+app.use(express.static(path.join(__dirname, "client/public")));
+app.use(bodyParser.urlencoded({ extended: true }));
+// for every request, include these static files in the response
+app.use(bodyParser.json()); // we want to use body-parses as a middelware
 
 // app.engine("handlebars", engine());
 // app.set("views", "./views");
@@ -20,8 +24,7 @@ console.log("inside app.js");
 // // app.engine('handlebars', handlebars({
 // //     layoutsDir: __dirname + '/views/layouts',
 // // })); // set the templating engine to handelbars and tell handel bars where to find the templates/layouts
-app.use(express.static(path.join(__dirname, "client/public"))); // for every request, include these static files in the response
-app.use(bodyParser.json()); // we want to use body-parses as a middelware
+
 //app.use(cookieParser());
 // const students = [];
 // app.use((req, res, next) => {
@@ -72,7 +75,32 @@ app.get("/login", (req, res) => {
   console.log("accessing route /login, METHOD = GET");
   res.sendFile(path.join(__dirname, "client/login.html"));
 });
+app.get("/signup", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/signup.html"));
+});
+app.post("/signup", async (req, res) => {
+  console.log("we got new user");
+  console.log(req.body);
+  try {
+    await userService.storeUser(req.body);
+    res.status(200).json({
+      message: "user created successfully",
+    });
+  } catch (err) {
+    res.status(400).json({
+      error: err,
+    });
+  }
+});
 
+app.listen(port, async () => {
+  console.log("Listening on port: " + port);
+  await getConnection();
+  console.log("connected to DB");
+});
+
+// exporting app so vercel can access it
+module.exports = app;
 //   try {
 //     // object destruction, taking fields out of an object as a variable
 //     const { userId, token } = await userService.login(body);
@@ -92,9 +120,6 @@ app.get("/login", (req, res) => {
 //   }
 // });
 
-app.get("/signup", (req, res) => {
-  res.sendFile(path.join(__dirname, "client/signup.html"));
-});
 // app.post("/login", async (req, res) => {
 //   console.log("we are in login");
 //   console.log(req.body);
@@ -179,11 +204,3 @@ app.post("/signup", async (req, res) => {
 
 // telling express to start listening on the given port (first parameter), when its listening it will
 // run the next call back
-app.listen(port, async () => {
-  console.log("Listening on port: " + port);
-  await getConnection();
-  console.log("connected to DB");
-});
-
-// exporting app so vercel can access it
-//module.exports = app;

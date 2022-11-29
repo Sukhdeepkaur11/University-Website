@@ -10,12 +10,13 @@ const handelSignup = async () => {
 
   console.log("inside signup");
   console.log(formValue);
+
   //const formDataValidated =
   const formDataValidated = validateSignup(formValue);
-
+  console.log(formDataValidated);
   if (formDataValidated) {
     // make a request call to our server to save user information
-    // async function postData(url = "", data = {}) {
+    //async function postData(url = "", data = {}) {
     const response = await fetch("/signup", {
       method: "POST",
       headers: {
@@ -23,7 +24,6 @@ const handelSignup = async () => {
         //Accept: "application/json",
       },
       body: JSON.stringify({
-        password: formValue.pass1,
         name: formValue.name,
         email: formValue.email,
         empid: formValue.empid,
@@ -39,6 +39,7 @@ const handelSignup = async () => {
     }
     //return response.json();
   }
+  //}
 };
 const validateSignup = (formValue) => {
   // confirm nothings empty
@@ -73,7 +74,6 @@ const validateSignup = (formValue) => {
     window.alert("Please make sure your passwords match");
     return false;
   }
-
   return true;
 };
 
