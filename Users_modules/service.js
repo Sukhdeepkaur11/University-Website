@@ -1,8 +1,9 @@
 const UserModel = require("./model");
 //const bcrypt = require("bcryptjs");
 const storeUser = async (userData) => {
-  const user = new UserModel(userData);
   try {
+    const user = new UserModel(userData);
+    console.log(userData);
     await user.save();
   } catch (err) {
     throw "failed to create user";

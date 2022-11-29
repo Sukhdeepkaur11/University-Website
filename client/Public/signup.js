@@ -73,6 +73,8 @@ const validateSignup = (formValue) => {
     window.alert("Please make sure your passwords match");
     return false;
   }
+
+  return true;
 };
 
 const signupButton = document.getElementById("signupBtn");
