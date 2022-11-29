@@ -15,29 +15,30 @@ const handelSignup = async () => {
 
   if (formDataValidated) {
     // make a request call to our server to save user information
-    // async function postData(url = "", data = {}) {
-    const response = await fetch("/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        //Accept: "application/json",
-      },
-      body: JSON.stringify({
-        password: formValue.pass1,
-        name: formValue.name,
-        email: formValue.email,
-        empid: formValue.empid,
-        pass1: formValue.pass1,
-        pass2: formValue.pass2,
-      }),
-    });
-    console.log(response);
-    if (response.status != 200) {
-      const responseBody = await response.json();
-      console.log(responseBody);
-      console.log("not correct");
+    async function postData(url = "", data = {}) {
+      const response = await fetch("/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          //Accept: "application/json",
+        },
+        body: JSON.stringify({
+          password: formValue.pass1,
+          name: formValue.name,
+          email: formValue.email,
+          empid: formValue.empid,
+          pass1: formValue.pass1,
+          pass2: formValue.pass2,
+        }),
+      });
+      console.log(response);
+      if (response.status != 200) {
+        const responseBody = await response.json();
+        console.log(responseBody);
+        console.log("not correct");
+      }
+      //return response.json();
     }
-    //return response.json();
   }
 };
 const validateSignup = (formValue) => {

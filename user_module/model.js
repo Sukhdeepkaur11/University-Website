@@ -1,20 +1,19 @@
 //const { Schema } = require("mongoose");
 
 //const { mongoose, Schema } = require("../db/db");
-const { getConnection, Schema, mongoose } = require("../db/db");
-const mongoose = getConnection();
+const { getConnection, Schema, mongoose } = require("../db/db.js");
+getConnection();
 const UserSchema = new Schema({
   name: String,
   empId: String,
   email: {
     type: String,
     required: true,
-    unique: true,
+    //unique: true,
   },
   password: String,
-  rpassword: String,
 });
+console.log("in model");
+const userModel = new mongoose.model("Users", UserSchema);
 
-const userModel = new mongoose.model("users", UserSchema);
-
-module.exports = UserModel;
+module.exports = userModel;
