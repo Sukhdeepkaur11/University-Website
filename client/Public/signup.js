@@ -10,36 +10,36 @@ const handelSignup = async () => {
 
   console.log("inside signup");
   console.log(formValue);
+
   //const formDataValidated =
   const formDataValidated = validateSignup(formValue);
-
+  console.log(formDataValidated);
   if (formDataValidated) {
     // make a request call to our server to save user information
-    async function postData(url = "", data = {}) {
-      const response = await fetch("/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          //Accept: "application/json",
-        },
-        body: JSON.stringify({
-          password: formValue.pass1,
-          name: formValue.name,
-          email: formValue.email,
-          empid: formValue.empid,
-          pass1: formValue.pass1,
-          pass2: formValue.pass2,
-        }),
-      });
-      console.log(response);
-      if (response.status != 200) {
-        const responseBody = await response.json();
-        console.log(responseBody);
-        console.log("not correct");
-      }
-      //return response.json();
+    //async function postData(url = "", data = {}) {
+    const response = await fetch("/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        //Accept: "application/json",
+      },
+      body: JSON.stringify({
+        name: formValue.name,
+        email: formValue.email,
+        empid: formValue.empid,
+        pass1: formValue.pass1,
+        pass2: formValue.pass2,
+      }),
+    });
+    console.log(response);
+    if (response.status != 200) {
+      const responseBody = await response.json();
+      console.log(responseBody);
+      console.log("not correct");
     }
+    //return response.json();
   }
+  //}
 };
 const validateSignup = (formValue) => {
   // confirm nothings empty
@@ -74,6 +74,7 @@ const validateSignup = (formValue) => {
     window.alert("Please make sure your passwords match");
     return false;
   }
+  return true;
 };
 
 const signupButton = document.getElementById("signupBtn");

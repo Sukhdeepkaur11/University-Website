@@ -76,28 +76,34 @@
             <input
               type="text"
               name="name"
+              id="nameInput"
               placeholder="Enter your name"
               required
             />
             <input
               type="email"
               name="email"
+              id="emailInput"
               placeholder="Enter email address"
               required
             />
             <input
               type="text"
               name="subject"
+              id="subjectInput"
               placeholder="Enter your subject"
               required
             />
             <textarea
               rows="8"
               name="message"
+              id="messageInput"
               placeholder="Message"
               required
             ></textarea>
-            <button type="submit" class="hero-btn red-btn">Send Message</button>
+            <button id="submitInput" type="submit" class="hero-btn red-btn">
+              Send Message
+            </button>
           </form>
         </div>
       </div>
@@ -119,7 +125,7 @@
         <i class="fa fa-linkedin"></i>
       </div>
     </section>
-
+    <script src="./signup.js"></script>
     <!----JavaScript for toggle menu---->
     <script>
       var navLinks = document.getElementById("navLinks");

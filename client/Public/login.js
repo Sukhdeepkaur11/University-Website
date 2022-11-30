@@ -63,7 +63,7 @@ signInButton.addEventListener("click", async (event) => {
   }
 });
 async function postData(url = "", data = {}) {
-  return await fetch(url, {
+  await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

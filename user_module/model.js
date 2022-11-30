@@ -11,7 +11,8 @@ const UserSchema = new Schema({
     required: true,
     //unique: true,
   },
-  password: String,
+  pass1: String,
+  pass2: String,
 });
 console.log("in model");
 const userModel = new mongoose.model("Users", UserSchema);

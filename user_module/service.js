@@ -2,8 +2,8 @@ const UserModel = require("./model.js");
 //const bcrypt = require("bcryptjs");
 console.log("in service");
 const storeUser = async (userData) => {
-  const user = new UserModel(userData);
   try {
+    const user = new UserModel(userData);
     await user.save();
     console.log("user created");
     res.send("item saved to database");
@@ -11,7 +11,7 @@ const storeUser = async (userData) => {
     throw "failed to create user";
   }
 };
-
+module.exports = storeUser;
 // const create = async (user) => {
 //   try {
 //     // encrypt user password and store it.
@@ -104,7 +104,7 @@ const storeUser = async (userData) => {
 //     };
 //   }
 // };
-module.exports = storeUser;
+
 // module.exports = {
 //   create,
 //   getOne,
