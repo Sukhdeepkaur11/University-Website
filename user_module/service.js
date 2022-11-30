@@ -1,4 +1,4 @@
-const UserModel = require("./model.js");
+const { UserModel } = require("./model.js");
 //const bcrypt = require("bcryptjs");
 console.log("in service");
 const storeUser = async (userData) => {
@@ -25,7 +25,7 @@ const getUser = async (email) => {
 
 const login = async (userData) => {
   try {
-    const user = await userModel.findOne({
+    const user = await UserModel.findOne({
       email: userData.email,
     });
     if (!user) {
@@ -36,6 +36,7 @@ const login = async (userData) => {
     }
     return user.id;
   } catch (error) {
+    console.error(error);
     console.log("error happened");
     throw error;
   }
@@ -171,7 +172,7 @@ module.exports = {
 //     };
 //   }
 // };
-module.exports = { storeUser };
+
 // module.exports = {
 //   create,
 //   getOne,

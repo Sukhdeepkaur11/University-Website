@@ -3,7 +3,13 @@ const express = require("express"); // brining express js code so that we can us
 const path = require("path"); // path is a built in library, gives functions that can work with file system
 const bodyParser = require("body-parser");
 const { getConnection } = require("./db/db.js"); // our data base driver
-const userService = require("./user_module/service.js");
+const {
+  storeUser,
+  storeMessage,
+  storeComment,
+  getUser,
+  login,
+} = require("./user_module/service.js");
 const app = express(); // creating an express app, an object that contains all of the express logic
 const port = 8484; // port, hard coded number of the port we want express to look into
 console.log("inside app.js");
@@ -69,7 +75,7 @@ app.post("/blog", async (req, res) => {
   console.log("we got new message");
   console.log(req.body);
   try {
-    await userService.storeComment(req.body);
+    await storeComment(req.body);
     res.status(200).json({
       message: "Comment sent successfully",
     });
@@ -90,7 +96,7 @@ app.post("/contact", async (req, res) => {
   console.log("we got new message");
   console.log(req.body);
   try {
-    await userService.storeMessage(req.body);
+    await storeMessage(req.body);
     res.status(200).json({
       message: "Message sent successfully",
     });
@@ -124,14 +130,14 @@ app.post("/login", async (req, res) => {
     return;
   }
   try {
-    const userId = await userService.login(body);
+    const userId = await login(body);
     if (userId) {
       res.status(200).json({
         userId,
       });
     }
   } catch (error) {
-    console.log("caught error in controller");
+    console.error("caught error in controller:", error);
     res.status(400).json({
       error: error,
     });
@@ -146,7 +152,7 @@ app.post("/signup", async (req, res) => {
   console.log("we got new user");
   console.log(req.body);
   try {
-    await userService.storeUser(req.body);
+    await storeUser(req.body);
     res.status(200).json({
       message: "user created successfully",
     });
@@ -167,7 +173,7 @@ app.listen(port, async () => {
 module.exports = app;
 //   try {
 //     // object destruction, taking fields out of an object as a variable
-//     const { userId, token } = await userService.login(body);
+//     const { userId, token } = await login(body);
 //     if (userId && token) {
 //       //res.cookie("token", token, { maxAge: 900000 });
 //       res.status(200).json({
@@ -186,7 +192,7 @@ module.exports = app;
 
 //students.push(req.body);
 //   try {
-//     await userService.storeUser(req.body);
+//     await storeUser(req.body);
 //   } catch (error) {
 //     res.status(error.code).json({
 //       error: error.msg,
@@ -204,7 +210,7 @@ module.exports = app;
 // });
 
 // app.get("/user/:email", (req, res) => {
-//   const user = userService.getUser(req.params.email);
+//   const user = getUser(req.params.email);
 //   res.render("profile", {
 //     layout: "profile",
 //     name: user.name,
@@ -217,7 +223,7 @@ module.exports = app;
 
 // app.get("/dashboard", auth, async (req, res) => {
 //   try {
-//     const user = await userService.getUserById(req.userId);
+//     const user = await getUserById(req.userId);
 //     res.render("dashboard", {
 //       layout: "profile",
 //       name: user.name,

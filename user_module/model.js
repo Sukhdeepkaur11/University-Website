@@ -15,7 +15,7 @@ const UserSchema = new Schema({
   pass2: String,
 });
 console.log("in model");
-const userModel = new mongoose.model("Users", UserSchema);
+const UserModel = new mongoose.model("Users", UserSchema);
 
 //Schema for messages
 
@@ -45,7 +45,7 @@ const CommentSchema = new Schema({
 const CommentModel = new mongoose.model("Comments", CommentSchema);
 
 module.exports = {
-  userModel,
+  UserModel,
   MessageModel,
   CommentModel,
 };
