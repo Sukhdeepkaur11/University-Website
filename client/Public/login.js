@@ -4,12 +4,15 @@ const login = async (event) => {
     email: document.getElementById("emailInput1").value,
     password: document.getElementById("passwordInput1").value,
   };
-  const response = await fetch("/login.html", {
+  const response = await fetch("/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(formData),
+    body: JSON.stringify({
+      email: formData.email,
+      password: formData.password,
+    }),
   });
   console.log(response);
 

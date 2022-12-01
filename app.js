@@ -106,23 +106,36 @@ app.get("/login", (req, res) => {
   console.log("accessing route /login, METHOD = GET");
   res.sendFile(path.join(__dirname, "client/login.html"));
 });
-let users = [];
+
 app.post("/login", async (req, res) => {
   console.log("we are in login");
   console.log(req.body);
-  const userInfo = req.body;
-  let loggedIn = false;
-  await users.map((users) => {
-    if (
-      users.email === userInfo.email &&
-      users.password === userInfo.password
-    ) {
-      loggedIn = true;
+  const body = req.body;
+
+  if (
+    !req.body.email ||
+    !req.body.password ||
+    !req.body.email.includes("@") ||
+    req.body.password.length === 0
+  ) {
+    res.status(400).json({
+      error: "Invalid user Information",
+    });
+    return;
+  }
+  try {
+    const userId = await userService.login(body);
+    if (userId) {
+      res.status(200).json({
+        userId,
+      });
     }
-  });
-  res.json({
-    loggedIn,
-  });
+  } catch (error) {
+    console.log("caught error in controller");
+    res.status(400).json({
+      error: error,
+    });
+  }
 });
 
 //SIGNUP ROUTES

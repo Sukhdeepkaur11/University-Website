@@ -12,6 +12,34 @@ const storeUser = async (userData) => {
     throw "failed to create user";
   }
 };
+const getUser = async (email) => {
+  try {
+    const user = UserModel.findOne({
+      email: email,
+    });
+    return user;
+  } catch (error) {
+    throw "unable to find user";
+  }
+};
+
+const login = async (userData) => {
+  try {
+    const user = await userModel.findOne({
+      email: userData.email,
+    });
+    if (!user) {
+      throw "invalid login";
+    }
+    if (userData.password != user.password) {
+      throw "Invalid login info";
+    }
+    return user.id;
+  } catch (error) {
+    console.log("error happened");
+    throw error;
+  }
+};
 
 //message handling from contact.html
 const MessageModel = require("./model.js");
@@ -48,6 +76,8 @@ module.exports = {
   storeUser,
   storeMessage,
   storeComment,
+  getUser,
+  login,
 };
 // const create = async (user) => {
 //   try {
