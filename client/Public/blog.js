@@ -1,32 +1,30 @@
-const handlecomment = async (event) => {
+const handleCommentInput = async (event) => {
   //read all the form information
   event.preventDefault();
-  const messageValue = {
-    name: document.getElementById("nameInput").value,
-    email: document.getElementById("emailInput").value,
-    subject: document.getElementById("subjectInput").value,
-    message: document.getElementById("messageInput").value,
+  const commentValue = {
+    name2: document.getElementById("nameInput").value,
+    email2: document.getElementById("emailInput").value,
+    comment: document.getElementById("commentInput").value,
   };
 
   console.log("inside contact us");
 
-  console.log(messageValue);
+  console.log(commentValue);
   window.alert = "Your message sent successfully";
-  validateMessage(messageValue);
+  validateComment(commentValue);
 
   // make a request call to our server to save user information
   //async function postData(url = "", data = {}) {
-  const response = await fetch("/contact", {
+  const response = await fetch("/blog", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       //Accept: "application/json",
     },
     body: JSON.stringify({
-      name: messageValue.name,
-      email: messageValue.email,
-      subject: messageValue.subject,
-      message: messageValue.message,
+      name2: commentValue.name2,
+      email2: commentValue.email2,
+      comment: commentValue.comment,
     }),
   });
   console.log(response);
@@ -38,20 +36,20 @@ const handlecomment = async (event) => {
   //return response.json();
 };
 
-const validateMessage = (messageValue) => {
+const validateComment = (commentValue) => {
   // confirm nothings empty
-  if (!messageValue.email || messageValue.email === "") {
+  if (!commentValue.email2 || commentValue.email2 === "") {
     window.alert("Please provide an email");
     //return false;
   }
 
-  if (messageValue.name === "" && messageValue.name === "") {
+  if (commentValue.name2 === "" && commentValue.name2 === "") {
     window.alert("Please tell us your name");
     return false;
   }
 
   // confirm email
-  if (!messageValue.email.includes("@")) {
+  if (!commentValue.email2.includes("@")) {
     window.alert("Please provide a valid email");
     return false;
   }
@@ -59,5 +57,5 @@ const validateMessage = (messageValue) => {
   return true;
 };
 
-const messageButton = document.getElementById("submitInput");
-messageButton.addEventListener("click", handlecomment);
+const commentButton = document.getElementById("submitInput");
+commentButton.addEventListener("click", handleCommentInput);

@@ -47,18 +47,6 @@ app.get("/about", (req, res) => {
   res.sendFile(path.join(__dirname, "client/about.html")); // responding to a request with a file
 });
 
-app.get("/blog", (req, res) => {
-  console.log("accessing route /, METHOD = GET");
-  // __dirname, is a nodejs built in variable representing the current directory where code is ran
-  res.sendFile(path.join(__dirname, "client/blog.html")); // responding to a request with a file
-});
-
-app.get("/contact", (req, res) => {
-  console.log("accessing route /, METHOD = GET");
-  // __dirname, is a nodejs built in variable representing the current directory where code is ran
-  res.sendFile(path.join(__dirname, "client/contact.html")); // responding to a request with a file
-});
-
 app.get("/course", (req, res) => {
   console.log("accessing route /, METHOD = GET");
   // __dirname, is a nodejs built in variable representing the current directory where code is ran
@@ -71,10 +59,73 @@ app.get("/loginstaff", (req, res) => {
   res.sendFile(path.join(__dirname, "client/loginstaff.html")); // responding to a request with a file
 });
 
+//BLOG ROUTES
+app.get("/blog", (req, res) => {
+  console.log("accessing route /, METHOD = GET");
+  // __dirname, is a nodejs built in variable representing the current directory where code is ran
+  res.sendFile(path.join(__dirname, "client/blog.html")); // responding to a request with a file
+});
+app.post("/blog", async (req, res) => {
+  console.log("we got new message");
+  console.log(req.body);
+  try {
+    await userService.storeComment(req.body);
+    res.status(200).json({
+      message: "Comment sent successfully",
+    });
+  } catch (err) {
+    res.status(400).json({
+      error: "Failed to send message",
+    });
+  }
+});
+
+//CONTACT ROUTES
+app.get("/contact", (req, res) => {
+  console.log("accessing route /, METHOD = GET");
+  // __dirname, is a nodejs built in variable representing the current directory where code is ran
+  res.sendFile(path.join(__dirname, "client/contact.html")); // responding to a request with a file
+});
+app.post("/contact", async (req, res) => {
+  console.log("we got new message");
+  console.log(req.body);
+  try {
+    await userService.storeMessage(req.body);
+    res.status(200).json({
+      message: "Message sent successfully",
+    });
+  } catch (err) {
+    res.status(400).json({
+      error: "Failed to send message",
+    });
+  }
+});
+
+//LOGIN ROUTES
 app.get("/login", (req, res) => {
   console.log("accessing route /login, METHOD = GET");
   res.sendFile(path.join(__dirname, "client/login.html"));
 });
+let users = [];
+app.post("/login", async (req, res) => {
+  console.log("we are in login");
+  console.log(req.body);
+  const userInfo = req.body;
+  let loggedIn = false;
+  await users.map((users) => {
+    if (
+      users.email === userInfo.email &&
+      users.password === userInfo.password
+    ) {
+      loggedIn = true;
+    }
+  });
+  res.json({
+    loggedIn,
+  });
+});
+
+//SIGNUP ROUTES
 app.get("/signup", (req, res) => {
   res.sendFile(path.join(__dirname, "client/signup.html"));
 });
@@ -120,38 +171,6 @@ module.exports = app;
 //   }
 // });
 
-// app.post("/login", async (req, res) => {
-//   console.log("we are in login");
-//   console.log(req.body);
-//   const userInfo = req.body;
-//   let loggedIn = false;
-//   await students.map((student) => {
-//     if (
-//       student.email === userInfo.email &&
-//       student.password === userInfo.password
-//     ) {
-//       loggedIn = true;
-//     }
-//   });
-//   res.json({
-//     loggedIn,
-//   });
-// });
-
-app.post("/signup", async (req, res) => {
-  console.log("we got new user");
-  console.log(req.body);
-  try {
-    await userService.storeUser(req.body);
-    res.status(200).json({
-      message: "user created successfully",
-    });
-  } catch (err) {
-    res.status(400).json({
-      error: err,
-    });
-  }
-});
 //students.push(req.body);
 //   try {
 //     await userService.storeUser(req.body);

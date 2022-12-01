@@ -88,10 +88,14 @@
           <div class="comment-box">
             <h3>Leave a comment</h3>
             <form class="comment-form">
-              <input type="text" placeholder="Enter Name" />
-              <input type="email" placeholder="Enter email" />
-              <textarea rows="5" placeholder="Your Comment"></textarea>
-              <button type="submit" class="hero-btn red-btn">
+              <input id="nameInput" type="text" placeholder="Enter Name" />
+              <input id="emailInput" type="email" placeholder=" Enter email" />
+              <textarea
+                id="commentInput"
+                rows="5"
+                placeholder="Your Comment"
+              ></textarea>
+              <button id="submitInput" type="submit" class="hero-btn red-btn">
                 POST COMMENT
               </button>
             </form>
@@ -149,6 +153,7 @@
       </div>
     </section>
 
+    <script src="./blog.js"></script>
     <!----JavaScript for toggle menu---->
     <script>
       var navLinks = document.getElementById("navLinks");

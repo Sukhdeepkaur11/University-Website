@@ -1,8 +1,9 @@
-const handelSignup = async () => {
+const handelSignup = async (event) => {
   //read all the form information
+  event.preventDefault();
   const formValue = {
     name: document.getElementById("name").value,
-    empid: document.getElementById("empId").value,
+    empId: document.getElementById("empId").value,
     email: document.getElementById("emailId").value,
     pass1: document.getElementById("passId").value,
     pass2: document.getElementById("passId2").value,
@@ -25,21 +26,29 @@ const handelSignup = async () => {
       },
       body: JSON.stringify({
         name: formValue.name,
+        empId: formValue.empid,
         email: formValue.email,
-        empid: formValue.empid,
         pass1: formValue.pass1,
         pass2: formValue.pass2,
       }),
     });
     console.log(response);
-    if (response.status != 200) {
-      const responseBody = await response.json();
-      console.log(responseBody);
-      console.log("not correct");
+
+    try {
+      if (response.status != 200) {
+        const responseBody = await response.json();
+        console.log(responseBody);
+      } else {
+        window.location = "/login.html";
+      }
+    } catch (err) {
+      res.status(400).json({
+        error: err,
+      });
+      //return response.json();
     }
-    //return response.json();
+    //}
   }
-  //}
 };
 const validateSignup = (formValue) => {
   // confirm nothings empty
@@ -74,6 +83,7 @@ const validateSignup = (formValue) => {
     window.alert("Please make sure your passwords match");
     return false;
   }
+
   return true;
 };
 

@@ -7,11 +7,48 @@ const storeUser = async (userData) => {
     await user.save();
     console.log("user created");
     res.send("item saved to database");
+    window.location = "/login.html";
   } catch (err) {
     throw "failed to create user";
   }
 };
-module.exports = storeUser;
+
+//message handling from contact.html
+const MessageModel = require("./model.js");
+//const bcrypt = require("bcryptjs");
+console.log("in service/contact form");
+const storeMessage = async (messageData) => {
+  try {
+    const message = new MessageModel(messageData);
+    await message.save();
+    console.log("Message Received");
+    res.send("Message saved to database");
+    window.location = "/contact.html";
+  } catch (err) {
+    throw "failed to save message";
+  }
+};
+
+//comment handling from blog.html
+const CommentModel = require("./model.js");
+//const bcrypt = require("bcryptjs");
+console.log("in service/blog form");
+const storeComment = async (commentData) => {
+  try {
+    const comment = new CommentModel(commentData);
+    await comment.save();
+    console.log("Comment Received");
+    res.send("Comment saved to database");
+    window.location = "/blog.html";
+  } catch (err) {
+    throw "failed to save Comment";
+  }
+};
+module.exports = {
+  storeUser,
+  storeMessage,
+  storeComment,
+};
 // const create = async (user) => {
 //   try {
 //     // encrypt user password and store it.
