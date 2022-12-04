@@ -11,33 +11,42 @@ const handlecomment = async (event) => {
   console.log("inside contact us");
 
   console.log(messageValue);
-  window.alert = "Your message sent successfully";
-  validateMessage(messageValue);
 
-  // make a request call to our server to save user information
-  //async function postData(url = "", data = {}) {
-  const response = await fetch("/contact", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      //Accept: "application/json",
-    },
-    body: JSON.stringify({
-      name: messageValue.name,
-      email: messageValue.email,
-      subject: messageValue.subject,
-      message: messageValue.message,
-    }),
-  });
-  console.log(response);
-  if (response.status != 200) {
-    const responseBody = await response.json();
-    console.log(responseBody);
-    console.log("not correct");
+  const messageDataValidated = validateMessage(messageValue);
+  console.log(messageDataValidated);
+  if (messageDataValidated) {
+    // make a request call to our server to save user information
+    //async function postData(url = "", data = {}) {
+    const response = await fetch("/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        //Accept: "application/json",
+      },
+      body: JSON.stringify({
+        name: messageValue.name,
+        email: messageValue.email,
+        subject: messageValue.subject,
+        message: messageValue.message,
+      }),
+    });
+    console.log(response);
+    try {
+      if (response.status != 200) {
+        const responseBody = await response.json();
+        console.log(responseBody);
+        console.log("not correct");
+      } else {
+        window.alert("Your message sent successfully");
+        window.location = "/contact.html";
+      }
+    } catch (err) {
+      response.status(400).json({
+        error: err,
+      });
+    }
   }
-  //return response.json();
 };
-
 const validateMessage = (messageValue) => {
   // confirm nothings empty
   if (!messageValue.email || messageValue.email === "") {

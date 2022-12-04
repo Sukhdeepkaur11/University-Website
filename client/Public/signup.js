@@ -26,7 +26,7 @@ const handelSignup = async (event) => {
       },
       body: JSON.stringify({
         name: formValue.name,
-        empId: formValue.empid,
+        empId: formValue.empId,
         email: formValue.email,
         pass1: formValue.pass1,
         pass2: formValue.pass2,
@@ -45,9 +45,7 @@ const handelSignup = async (event) => {
       res.status(400).json({
         error: err,
       });
-      //return response.json();
     }
-    //}
   }
 };
 const validateSignup = (formValue) => {
@@ -86,69 +84,13 @@ const validateSignup = (formValue) => {
 
   return true;
 };
+function resetFunc() {
+  document.getElementById("name").value == "";
+  document.getElementById("empId").reset();
+  document.getElementById("emailId").reset();
+  document.getElementById("passId").reset();
+  document.getElementById("passId2").reset();
+}
 
 const signupButton = document.getElementById("signupBtn");
 signupButton.addEventListener("click", handelSignup);
-
-// const emailInput = document.querySelector("#emailId");
-// let email = document.getElementById("emailId").value;
-// emailInput.addEventListener("focusout", () => {
-//   console.log("user done typing");
-//   let email = emailInput.value;
-//   if (email.includes("@")) {
-//     console.log("all good");
-//   } else {
-//     window.alert("please provide valid email");
-//   }
-// });
-// const passwordInput = document.getElementById("passId");
-// let password = document.getElementById("passId").value;
-// // passwordInput.addEventListener("keyup", () => {
-// //   password = passwordInput.value;
-// // });
-
-// const passwordInput2 = document.getElementById("passId2");
-// let password2 = document.getElementById("passId2").value;
-
-// const signupButton = document.getElementById("signupBtn");
-// signupButton.addEventListener("click", async (event) => {
-//   event.preventDefault();
-//   let name = nameInput.value;
-//   empid = empInput.value;
-//   password = passwordInput.value;
-//   email = emailInput.value;
-//   password2 = passwordInput2.value;
-//   console.log("name= " + name);
-//   console.log("empid = " + empid);
-//   console.log("email = " + email);
-//   console.log("password = " + password);
-//   console.log("Repeat password = " + password2);
-//   const userData = {
-//     email: email,
-//     password: password,
-//   };
-//   const response = await postData("/signup", userData);
-//   if (response.status == 200) {
-//     window.location = "/login.html";
-//   }
-// });
-
-// validate user input
-
-//         pass1: formValue.pass1,
-//         pass2: formValue.pass2,
-//         empid: formValue.empid,
-//         name: formValue.name,
-//         email: formValue.email,
-//       }),
-//     });
-//     console.log(response);
-//     if (response.status !== 200) {
-//       const responseBody = await response.json();
-//       console.log(responseBody);
-//       //showError(responseBody.error);
-//     } else {
-//       window.location = "/";
-//     }
-//   }
-// }

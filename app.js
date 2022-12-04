@@ -81,7 +81,7 @@ app.post("/blog", async (req, res) => {
     });
   } catch (err) {
     res.status(400).json({
-      error: "Failed to send message",
+      error: err,
     });
   }
 });
@@ -102,7 +102,8 @@ app.post("/contact", async (req, res) => {
     });
   } catch (err) {
     res.status(400).json({
-      error: "Failed to send message",
+      error: err,
+      // "Failed to send message",
     });
   }
 });

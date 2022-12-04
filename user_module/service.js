@@ -1,13 +1,10 @@
-const { UserModel } = require("./model.js");
+const { UserModel, MessageModel, CommentModel } = require("./model.js");
 //const bcrypt = require("bcryptjs");
-console.log("in service");
 const storeUser = async (userData) => {
   try {
     const user = new UserModel(userData);
     await user.save();
     console.log("user created");
-    res.send("item saved to database");
-    window.location = "/login.html";
   } catch (err) {
     throw "failed to create user";
   }
@@ -31,19 +28,18 @@ const login = async (userData) => {
     if (!user) {
       throw "invalid login";
     }
-    if (userData.password != user.password) {
+    if (userData.password != user.pass1) {
       throw "Invalid login info";
     }
     return user.id;
   } catch (error) {
-    console.error(error);
     console.log("error happened");
     throw error;
   }
 };
 
 //message handling from contact.html
-const MessageModel = require("./model.js");
+//const MessageModel = require("./model.js");
 //const bcrypt = require("bcryptjs");
 console.log("in service/contact form");
 const storeMessage = async (messageData) => {
@@ -51,15 +47,16 @@ const storeMessage = async (messageData) => {
     const message = new MessageModel(messageData);
     await message.save();
     console.log("Message Received");
-    res.send("Message saved to database");
-    window.location = "/contact.html";
+    //res.send("Message saved to database");
+    //window.location = "/contact.html";
   } catch (err) {
+    console.log(err);
     throw "failed to save message";
   }
 };
 
 //comment handling from blog.html
-const CommentModel = require("./model.js");
+//const CommentModel = require("./model.js");
 //const bcrypt = require("bcryptjs");
 console.log("in service/blog form");
 const storeComment = async (commentData) => {
@@ -67,8 +64,8 @@ const storeComment = async (commentData) => {
     const comment = new CommentModel(commentData);
     await comment.save();
     console.log("Comment Received");
-    res.send("Comment saved to database");
-    window.location = "/blog.html";
+    //res.send("Comment saved to database");
+    //window.location = "/blog.html";
   } catch (err) {
     throw "failed to save Comment";
   }
@@ -80,42 +77,6 @@ module.exports = {
   getUser,
   login,
 };
-// const create = async (user) => {
-//   try {
-//     // encrypt user password and store it.
-//     const password = await bcrypt.hashSync(user.password, 10);
-//     const userData = {
-//       email: user.email,
-//       password: password,
-//     };
-//     return await UserModel.create(userData);
-//   } catch (error) {
-//     console.log(error);
-//     throw {
-//       code: 401,
-//       message: "Invalid User",
-//     };
-//   }
-// };
-
-// const getOne = async (email) => {
-//   try {
-//     const user = await UserModel.findOne({
-//       email: email,
-//     });
-
-//     if (!user) {
-//       throw "";
-//     }
-
-//     return user;
-//   } catch (error) {
-//     throw {
-//       code: 401,
-//       message: "couldnt find user",
-//     };
-//   }
-// };
 
 // const getOneById = async (id) => {
 //   try {
@@ -132,23 +93,6 @@ module.exports = {
 //     throw {
 //       code: 401,
 //       message: "couldnt find user",
-//     };
-//   }
-// };
-
-// const getAll = async () => {
-//   try {
-//     const users = await UserModel.find({}).lean();
-
-//     if (!users || users.length === 0) {
-//       throw "";
-//     }
-
-//     return users;
-//   } catch (error) {
-//     throw {
-//       code: 401,
-//       message: "couldnt find any users",
 //     };
 //   }
 // };
@@ -171,12 +115,4 @@ module.exports = {
 //       message: "Couldn't find user",
 //     };
 //   }
-// };
-
-// module.exports = {
-//   create,
-//   getOne,
-//   getAll,
-//   login,
-//   getOneById,
 // };

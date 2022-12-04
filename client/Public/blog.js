@@ -2,54 +2,61 @@ const handleCommentInput = async (event) => {
   //read all the form information
   event.preventDefault();
   const commentValue = {
-    name2: document.getElementById("nameInput").value,
-    email2: document.getElementById("emailInput").value,
+    name: document.getElementById("nameInput").value,
+    email: document.getElementById("emailInput").value,
     comment: document.getElementById("commentInput").value,
   };
 
-  console.log("inside contact us");
-
   console.log(commentValue);
-  window.alert = "Your message sent successfully";
-  validateComment(commentValue);
 
-  // make a request call to our server to save user information
-  //async function postData(url = "", data = {}) {
-  const response = await fetch("/blog", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      //Accept: "application/json",
-    },
-    body: JSON.stringify({
-      name2: commentValue.name2,
-      email2: commentValue.email2,
-      comment: commentValue.comment,
-    }),
-  });
-  console.log(response);
-  if (response.status != 200) {
-    const responseBody = await response.json();
-    console.log(responseBody);
-    console.log("not correct");
-  }
-  //return response.json();
+  const commentDataValidated = validateComment(commentValue);
+  console.log(commentDataValidated);
+  if (commentDataValidated) {
+    // make a request call to our server to save user information
+    //async function postData(url = "", data = {}) {
+    const response = await fetch("/blog", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        //Accept: "application/json",
+      },
+      body: JSON.stringify({
+        name: commentValue.name,
+        email: commentValue.email,
+        comment: commentValue.comment,
+      }),
+    });
+    console.log(response);
+    try {
+      if (response.status != 200) {
+        const responseBody = await response.json();
+        console.log(responseBody);
+      } else {
+        window.alert("Your message sent successfully");
+        window.location = "/blog.html";
+      }
+    } catch (err) {
+      res.status(400).json({
+        error: err,
+      });
+    }
+  } //return response.json();
 };
 
 const validateComment = (commentValue) => {
   // confirm nothings empty
-  if (!commentValue.email2 || commentValue.email2 === "") {
+  if (!commentValue.email || commentValue.email === " ") {
     window.alert("Please provide an email");
-    //return false;
+    return false;
   }
 
-  if (commentValue.name2 === "" && commentValue.name2 === "") {
+  if (commentValue.name === "" && commentValue.name === "") {
     window.alert("Please tell us your name");
     return false;
   }
 
   // confirm email
-  if (!commentValue.email2.includes("@")) {
+  if (!commentValue.email.includes("@")) {
     window.alert("Please provide a valid email");
     return false;
   }

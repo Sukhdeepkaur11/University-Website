@@ -1,6 +1,3 @@
-//const { Schema } = require("mongoose");
-
-//const { mongoose, Schema } = require("../db/db");
 const { getConnection, Schema, mongoose } = require("../db/db.js");
 getConnection();
 const UserSchema = new Schema({
@@ -12,16 +9,15 @@ const UserSchema = new Schema({
     //unique: true,
   },
   pass1: String,
-  pass2: String,
 });
 console.log("in model");
-const UserModel = new mongoose.model("Users", UserSchema);
+const UserModel = new mongoose.model("users", UserSchema);
 
 //Schema for messages
 
 const MessageSchema = new Schema({
-  name1: String,
-  email1: {
+  name: String,
+  email: {
     type: String,
     required: true,
     //unique: true,
@@ -29,20 +25,20 @@ const MessageSchema = new Schema({
   subject: String,
   message: String,
 });
-const MessageModel = new mongoose.model("Messages", MessageSchema);
+const MessageModel = new mongoose.model("messages", MessageSchema);
 
 //Schema for comments in Blog.html
 
 const CommentSchema = new Schema({
-  name2: String,
-  email2: {
+  name: String,
+  email: {
     type: String,
     required: true,
     //unique: true,
   },
-  Comment: String,
+  comment: String,
 });
-const CommentModel = new mongoose.model("Comments", CommentSchema);
+const CommentModel = new mongoose.model("comments", CommentSchema);
 
 module.exports = {
   UserModel,
