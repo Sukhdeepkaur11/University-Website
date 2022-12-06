@@ -28,8 +28,7 @@ const handelSignup = async (event) => {
         name: formValue.name,
         empId: formValue.empId,
         email: formValue.email,
-        pass1: formValue.pass1,
-        pass2: formValue.pass2,
+        password: formValue.pass1,
       }),
     });
     console.log(response);

@@ -8,9 +8,8 @@ const UserSchema = new Schema({
     required: true,
     //unique: true,
   },
-  pass1: String,
+  password: String,
 });
-console.log("in model");
 const UserModel = new mongoose.model("users", UserSchema);
 
 //Schema for messages

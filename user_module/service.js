@@ -1,7 +1,12 @@
 const { UserModel, MessageModel, CommentModel } = require("./model.js");
-//const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 const storeUser = async (userData) => {
   try {
+    const password = await bcrypt.hash(userData.password, 10);
+    userData = {
+      ...userData,
+      password,
+    };
     const user = new UserModel(userData);
     await user.save();
     console.log("user created");
@@ -28,19 +33,34 @@ const login = async (userData) => {
     if (!user) {
       throw "invalid login";
     }
-    if (userData.password != user.pass1) {
-      throw "Invalid login info";
+    const matches = await bcrypt.compare(userData.password, user.password);
+    if (!matches) {
+      throw {
+        code: 404,
+        message: "Invalid password",
+      };
     }
+
     return user.id;
   } catch (error) {
-    console.log("error happened");
-    throw error;
+    throw {
+      code: 404,
+      message: "Couldn't find user",
+    };
   }
 };
 
+//   if (userData.password != user.password) {
+//     throw "Invalid login info";
+//   }
+//   return user.id;
+// } catch (error) {
+//   console.log("error happened");
+//   throw error;
+// }
+
 //message handling from contact.html
-//const MessageModel = require("./model.js");
-//const bcrypt = require("bcryptjs");
+
 console.log("in service/contact form");
 const storeMessage = async (messageData) => {
   try {
@@ -56,8 +76,7 @@ const storeMessage = async (messageData) => {
 };
 
 //comment handling from blog.html
-//const CommentModel = require("./model.js");
-//const bcrypt = require("bcryptjs");
+
 console.log("in service/blog form");
 const storeComment = async (commentData) => {
   try {
