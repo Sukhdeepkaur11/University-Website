@@ -35,7 +35,6 @@ const handlecomment = async (event) => {
       if (response.status != 200) {
         const responseBody = await response.json();
         console.log(responseBody);
-        console.log("not correct");
       } else {
         window.alert("Your message sent successfully");
         window.location = "/contact.html";

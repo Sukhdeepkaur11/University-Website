@@ -164,7 +164,12 @@ app.post("/signup", async (req, res) => {
 
 app.listen(port, async () => {
   console.log("Listening on port: " + port);
-  await getConnection();
+  try {
+    await getConnection();
+  } catch (error) {
+    console.log(error);
+  }
+
   console.log("connected to DB");
 });
 

@@ -744,7 +744,7 @@ tb1 {
   border: 1px solid transparent;
   pointer-events: none;
 }
-//signup
+
 .errorToast:not(.show) {
   top: 17px;
   right: 21px;
