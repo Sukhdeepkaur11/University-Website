@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 //const jwt = require("jsonwebtoken");
 const storeUser = async (userData) => {
   try {
-    const password = await bcrypt.hash(userData.password, 10);
+    const password = await bcrypt.hashSync(userData.password, 10);
     userData = {
       ...userData,
       password,
