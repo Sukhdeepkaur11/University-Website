@@ -1,5 +1,6 @@
 const { UserModel, MessageModel, CommentModel } = require("./model.js");
 const bcrypt = require("bcryptjs");
+//const jwt = require("jsonwebtoken");
 const storeUser = async (userData) => {
   try {
     const password = await bcrypt.hash(userData.password, 10);
@@ -40,8 +41,11 @@ const login = async (userData) => {
         message: "Invalid password",
       };
     }
-
+    // const token = await jwt.sign({ userId: user.id }, "SECRET_KEY", {
+    //   expiresIn: "2h"},
+    // );
     return user.id;
+    //token,;
   } catch (error) {
     throw {
       code: 404,
@@ -49,15 +53,6 @@ const login = async (userData) => {
     };
   }
 };
-
-//   if (userData.password != user.password) {
-//     throw "Invalid login info";
-//   }
-//   return user.id;
-// } catch (error) {
-//   console.log("error happened");
-//   throw error;
-// }
 
 //message handling from contact.html
 

@@ -573,6 +573,10 @@ tb1 {
   margin: auto;
   padding: 20px 10;
 }
+#logout {
+  margin-right: 140px;
+  top: 50%;
+}
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap");
 
 :root {

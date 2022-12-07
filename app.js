@@ -32,13 +32,6 @@ app.use(bodyParser.json()); // we want to use body-parses as a middelware
 // // })); // set the templating engine to handelbars and tell handel bars where to find the templates/layouts
 
 //app.use(cookieParser());
-// const students = [];
-// app.use((req, res, next) => {
-//   console.log("arequest came in middleware");
-//   console.log(req.path);
-//   console.log(req.method);
-//   next();
-// });
 
 /* defining routes */
 app.get("/", (req, res) => {
@@ -61,6 +54,8 @@ app.get("/course", (req, res) => {
 
 app.get("/loginstaff", (req, res) => {
   console.log("accessing route /, METHOD = GET");
+  //const cookies = req.cookies;
+  //console.log(cookies);
   // __dirname, is a nodejs built in variable representing the current directory where code is ran
   res.sendFile(path.join(__dirname, "client/loginstaff.html")); // responding to a request with a file
 });
@@ -133,8 +128,11 @@ app.post("/login", async (req, res) => {
   try {
     const userId = await login(body);
     if (userId) {
+      //res.cookie("token", token, { maxAge: 900000 });
+      //res.set("authorization", token);
       res.status(200).json({
         userId,
+        //token,
       });
     }
   } catch (error) {
