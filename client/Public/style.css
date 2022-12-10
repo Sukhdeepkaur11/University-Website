@@ -574,8 +574,11 @@ tb1 {
   padding: 20px 10;
 }
 #logout {
-  margin-right: 140px;
-  top: 50%;
+  margin-left: 1390px;
+  height: 12%;
+  width: 6%;
+  background-color: rgb(114, 116, 122);
+  border-style: none;
 }
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap");
 
@@ -743,11 +746,4 @@ tb1 {
 .calendar .calendar-inner .calendar-body .next-dates:hover {
   border: 1px solid transparent;
   pointer-events: none;
-}
-
-.errorToast:not(.show) {
-  top: 17px;
-  right: 21px;
-  display: block;
-  position: fixed;
 }

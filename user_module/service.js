@@ -56,7 +56,6 @@ const login = async (userData) => {
 
 //message handling from contact.html
 
-console.log("in service/contact form");
 const storeMessage = async (messageData) => {
   try {
     const message = new MessageModel(messageData);
@@ -72,7 +71,6 @@ const storeMessage = async (messageData) => {
 
 //comment handling from blog.html
 
-console.log("in service/blog form");
 const storeComment = async (commentData) => {
   try {
     const comment = new CommentModel(commentData);
@@ -91,42 +89,3 @@ module.exports = {
   getUser,
   login,
 };
-
-// const getOneById = async (id) => {
-//   try {
-//     const user = await UserModel.findOne({
-//       _id: id,
-//     });
-
-//     if (!user) {
-//       throw "";
-//     }
-
-//     return user;
-//   } catch (error) {
-//     throw {
-//       code: 401,
-//       message: "couldnt find user",
-//     };
-//   }
-// };
-
-// const login = async (userDetails) => {
-//   try {
-//     const user = await getOne(userDetails.email);
-//     const matches = await bcrypt.compare(userDetails.password, user.password);
-//     if (!matches) {
-//       throw {
-//         code: 404,
-//         message: "Invalid password",
-//       };
-//     }
-
-//     return user;
-//   } catch (error) {
-//     throw {
-//       code: 404,
-//       message: "Couldn't find user",
-//     };
-//   }
-// };

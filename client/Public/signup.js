@@ -83,13 +83,13 @@ const validateSignup = (formValue) => {
 
   return true;
 };
-function resetFunc() {
-  document.getElementById("name").value == "";
-  document.getElementById("empId").reset();
-  document.getElementById("emailId").reset();
-  document.getElementById("passId").reset();
-  document.getElementById("passId2").reset();
-}
+const resetFunc = () => {
+  document.getElementById("name").reset();
+  formValue.empId == "";
+  formValue.email == "";
+  formValue.pass1 == "";
+  formValue.pass2 == "";
+};
 
 const signupButton = document.getElementById("signupBtn");
 signupButton.addEventListener("click", handelSignup);

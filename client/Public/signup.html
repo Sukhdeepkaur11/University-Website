@@ -2,6 +2,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>University Website</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,600,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
@@ -57,6 +58,7 @@
                 
                                 <div class="row">
                                   <div class="mb-4">
+                                    <form>
                                     <div class="form-outline" id="myForm">                                    
                                       <input type="text" id="name" class="form-control form-control-lg" />
                                       <label class="form-label" for="form3Example1m" id="name">Full name</label>
@@ -88,24 +90,24 @@
                                 
                                   <div class="mb-4">
                                     <div class="form-outline">
-                                    <input type="password" id="passId" class="form-control form-control-lg" />
+                                    <input type="password" id="passId" class="form-control form-control-lg" /><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
                                     <label class="form-label" for="form3Example99" id="passId">Password</label>
                                     </div>
                                   </div>
                   
                                   <div class="mb-4">
                                     <div class="form-outline">
-                                    <input type="text" id="passId2" class="form-control form-control-lg" />
+                                    <input type="password" id="passId2" class="form-control form-control-lg" autocomplete="current-password" required=""/><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
                                     <label class="form-label" for="form3Example97" id="passId2">Repeat Password</label>
                                     </div>
                                   </div>
                                 
                 
                                 <div class="d-flex justify-content-end pt-3">
-                                  <button type="reset" class="btn btn-light btn-lg" onclick="resetFunc()" value="resetForm">Reset all</button>
+                                  <button type="reset" class="btn btn-light btn-lg">Reset all</button>
                                   <button href="login.html" type="button" class="btn btn-warning btn-lg ms-2" id="signupBtn">Submit form</button>
                                 </div>
-                              
+                              </form>
                               </div>
                             </div>
                           </div>
@@ -167,7 +169,19 @@
     </div>
     </section>
 
+  <script>
+  const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#id_password');
   
+    togglePassword.addEventListener('click', function (e) {
+      // toggle the type attribute
+      const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      // toggle the eye slash icon
+      this.classList.toggle('fa-eye-slash');
+  });
+  </script>
+
 <script src="./signup.js"></script>
 <!----JavaScript for toggle menu---->
 <script>

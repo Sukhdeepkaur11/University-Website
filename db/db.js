@@ -13,7 +13,7 @@ const getConnection = async () => {
   } else {
     console.log("creating new connection");
     connection = await mongoose.connect(
-      "mongodb+srv://bsukhi11:Baidwan01@cluster0.jzir3o1.mongodb.net/?retryWrites=true&w=majority"
+      "mongodb+srv://bsukhi11:Baidwan01@cluster0.jzir3o1.mongodb.net/University_Website?retryWrites=true&w=majority"
     );
 
     return connection;
