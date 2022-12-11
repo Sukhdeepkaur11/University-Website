@@ -9,6 +9,7 @@ const UserSchema = new Schema({
     //unique: true,
   },
   password: String,
+  isTeacher: Boolean,
 });
 const UserModel = new mongoose.model("users", UserSchema);
 

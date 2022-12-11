@@ -44,7 +44,7 @@ const login = async (userData) => {
     // const token = await jwt.sign({ userId: user.id }, "SECRET_KEY", {
     //   expiresIn: "2h"},
     // );
-    return user.id;
+    return user;
     //token,;
   } catch (error) {
     throw {

@@ -14,13 +14,11 @@ const login = async (event) => {
       password: formData.password,
     }),
   });
-  console.log(response);
-
+  const data = response.json();
+  data.then((data) => console.log(data.userId, data.isTeacher));
+  let isTeacher;
   if (response.status === 200) {
-    if (
-      response.body.email === "wendy.smiley@umanitoba.ca" &&
-      response.body.password === "wendysmiley01"
-    ) {
+    if (isTeacher) {
       window.location = "/loginstaff.html";
     } else {
       window.alert("Incorrect login details. Please try again");
@@ -28,7 +26,7 @@ const login = async (event) => {
     }
   } else {
     window.alert("Incorrect login details. Please try again");
-    //window.location = "/login.html";
+    window.location = "/login.html";
   }
 };
 const loginButton = document.getElementById("loginButton");

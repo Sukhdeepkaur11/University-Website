@@ -747,3 +747,13 @@ tb1 {
   border: 1px solid transparent;
   pointer-events: none;
 }
+.toggle {
+  background: none;
+  border: none;
+  color: #337ab7;
+  font-weight: 600;
+  position: absolute;
+  right: 0.75rem;
+  top: 2.5rem;
+  z-index: 9;
+}

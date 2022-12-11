@@ -68,9 +68,13 @@
                                       <label class="form-label" for="form2Example17" id="emailInput">Email address</label>
                                     </div>
                   
-                                    <div class="form-outline mb-4">
-                                      <input type="password" id="passwordInput1" class="form-control form-control-lg" />
-                                      <label class="form-label" for="form2Example27" id="passwordInput">Password</label><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
+                                    <div class="form-outline mb-4"> 
+                                      <div class="row">
+                                        <div class="col-11"> <input type="password" id="passwordInput1" class="form-control form-control-lg" /></div>
+                                      <div class="col-1"><i class="far fa-eye" id="togglePassword" style="margin-top: 16px; cursor: pointer;"></i></div>
+                                      </div>
+                                     
+                                      <label class="form-label" for="form2Example27" id="passwordInput">Password</label>
                                     </div>
                   
                                     <div class="pt-1 mb-4">
@@ -145,7 +149,7 @@
 
     <script>
       const togglePassword = document.querySelector('#togglePassword');
-        const password = document.querySelector('#id_password');
+        const password = document.querySelector('#passwordInput1');
       
         togglePassword.addEventListener('click', function (e) {
           // toggle the type attribute

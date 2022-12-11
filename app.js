@@ -126,12 +126,13 @@ app.post("/login", async (req, res) => {
     return;
   }
   try {
-    const userId = await login(body);
-    if (userId) {
+    const user = await login(req.body);
+    if (user) {
       //res.cookie("token", token, { maxAge: 900000 });
       //res.set("authorization", token);
-      res.status(200).json({
-        userId,
+      res.send({
+        userId: user.userId,
+        isTeacher: user.isTeacher,
         //token,
       });
     }

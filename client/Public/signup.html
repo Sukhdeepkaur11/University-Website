@@ -60,16 +60,16 @@
                                   <div class="mb-4">
                                     <form>
                                     <div class="form-outline" id="myForm">                                    
-                                      <input type="text" id="name" class="form-control form-control-lg" />
-                                      <label class="form-label" for="form3Example1m" id="name">Full name</label>
+                                      <input type="text" id="name" class="form-control form-control-lg" required minlength="2" maxlength="8" />
+                                      <label class="form-label" for="form3Example1m" id="name" >Full name</label>
                                     </div>
-                                  </div>
+                                  </div> 
                                 </div>
                 
                                 <div class="row">
                                   <div class="mb-4">
                                     <div class="form-outline">
-                                      <input type="text" id="empId" class="form-control form-control-lg" />
+                                      <input type="text" id="empId" class="form-control form-control-lg" required/>
                                       <label class="form-label" for="form3Example1n1" id="empId">EMP ID</label>
                                     </div>
                                   </div>
@@ -81,23 +81,24 @@
                                 <div class="row">            
                                 <div class="mb-4">
                                   <div class="form-outline">
-                                  <input type="text" id="emailId" class="form-control form-control-lg" />
-                                  <label class="form-label" for="form3Example97" id="emailId">Email ID</label>
+                                  <input type="text" id="emailId" class="form-control form-control-lg" required />
+                                  <label class="form-label" for="form3Example97" id="emailId" >Email ID</label>
+                                  <p id="errormsg"> </p>
                                   </div>
                                 </div>
                                 </div>
 
                                 
                                   <div class="mb-4">
-                                    <div class="form-outline">
-                                    <input type="password" id="passId" class="form-control form-control-lg" /><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
+                                    <div class="row form-outline"><div class="col-10">
+                                    <input type="password" id="passId" class="form-control form-control-lg" required/></div><div class="col"><i class="far fa-eye" id="togglePassword" style="margin-top: 16px; cursor: pointer;"></i></div>
                                     <label class="form-label" for="form3Example99" id="passId">Password</label>
                                     </div>
                                   </div>
                   
                                   <div class="mb-4">
-                                    <div class="form-outline">
-                                    <input type="password" id="passId2" class="form-control form-control-lg" autocomplete="current-password" required=""/><i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
+                                    <div class="row form-outline"><div class="col-10">
+                                    <input type="password" id="passId2" class="form-control form-control-lg" autocomplete="current-password" required/></div><div class="col"><i class="far fa-eye" id="togglePassword2" style="margin-top: 16px; cursor: pointer;"></i></div>
                                     <label class="form-label" for="form3Example97" id="passId2">Repeat Password</label>
                                     </div>
                                   </div>
@@ -171,12 +172,21 @@
 
   <script>
   const togglePassword = document.querySelector('#togglePassword');
-    const password = document.querySelector('#id_password');
+    const password = document.querySelector('#passId');
+    const togglePassword2 = document.querySelector('#togglePassword2');
+    const password2 = document.querySelector('#passId2');
   
     togglePassword.addEventListener('click', function (e) {
       // toggle the type attribute
       const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
       password.setAttribute('type', type);
+      // toggle the eye slash icon
+      this.classList.toggle('fa-eye-slash');
+  });
+  togglePassword2.addEventListener('click', function (e) {
+      // toggle the type attribute
+      const type = password2.getAttribute('type') === 'password' ? 'text' : 'password';
+      password2.setAttribute('type', type);
       // toggle the eye slash icon
       this.classList.toggle('fa-eye-slash');
   });
