@@ -20,7 +20,7 @@ console.log("inside app.js");
 //const cookieParser = require("cookie-parser");
 // const { auth } = require("../users_module/auth");
 
-app.use(express.static(path.join(__dirname, "client/public")));
+app.use(express.static(path.join(__dirname, "/client/public")));
 app.use(bodyParser.urlencoded({ extended: true }));
 // for every request, include these static files in the response
 app.use(bodyParser.json()); // we want to use body-parses as a middelware
