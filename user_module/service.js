@@ -41,11 +41,8 @@ const login = async (userData) => {
         message: "Invalid password",
       };
     }
-    // const token = await jwt.sign({ userId: user.id }, "SECRET_KEY", {
-    //   expiresIn: "2h"},
-    // );
+
     return user;
-    //token,;
   } catch (error) {
     throw {
       code: 404,

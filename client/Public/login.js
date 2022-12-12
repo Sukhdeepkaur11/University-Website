@@ -1,5 +1,6 @@
 const login = async (event) => {
   event.preventDefault();
+  let isTeacher = false;
   const formData = {
     email: document.getElementById("emailInput1").value,
     password: document.getElementById("passwordInput1").value,
@@ -14,9 +15,10 @@ const login = async (event) => {
       password: formData.password,
     }),
   });
+
   const data = response.json();
   data.then((data) => console.log(data.userId, data.isTeacher));
-  let isTeacher;
+
   if (response.status === 200) {
     if (isTeacher) {
       window.location = "/loginstaff.html";
@@ -26,7 +28,7 @@ const login = async (event) => {
     }
   } else {
     window.alert("Incorrect login details. Please try again");
-    window.location = "/login.html";
+    //window.location = "/login.html";
   }
 };
 const loginButton = document.getElementById("loginButton");

@@ -13,6 +13,7 @@ const {
 const app = express(); // creating an express app, an object that contains all of the express logic
 const port = 8484; // port, hard coded number of the port we want express to look into
 console.log("inside app.js");
+
 // it parses the body of HTTP request to a JS object that we can use
 // const { engine } = require("express-handlebars"); // bring in handelbars function
 
@@ -127,6 +128,9 @@ app.post("/login", async (req, res) => {
   }
   try {
     const user = await login(req.body);
+    console.log(user);
+    console.log(isTeacher);
+    console.log(req.body);
     if (user) {
       //res.cookie("token", token, { maxAge: 900000 });
       //res.set("authorization", token);
