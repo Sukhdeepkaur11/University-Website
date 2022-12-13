@@ -1,6 +1,6 @@
 const login = async (event) => {
   event.preventDefault();
-  let isTeacher = false;
+  let isTeacher = true;
   const formData = {
     email: document.getElementById("emailInput1").value,
     password: document.getElementById("passwordInput1").value,
@@ -22,8 +22,6 @@ const login = async (event) => {
   if (response.status === 200) {
     if (isTeacher) {
       window.location = "/loginstaff";
-    } else {
-      window.location = "/loginstaff2";
     }
   } else {
     window.alert("Incorrect login details. Please try again");
