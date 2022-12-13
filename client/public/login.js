@@ -25,7 +25,7 @@ const login = async (event) => {
     }
   } else {
     window.alert("Incorrect login details. Please try again");
-    //window.location = "/login.html";
+    window.location = "/login.html";
   }
 };
 const loginButton = document.getElementById("loginButton");
