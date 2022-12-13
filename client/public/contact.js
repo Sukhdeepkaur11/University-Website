@@ -37,7 +37,7 @@ const handlecomment = async (event) => {
         console.log(responseBody);
       } else {
         window.alert("Your message sent successfully");
-        window.location = "/contact.html";
+        window.location = "/contact";
       }
     } catch (err) {
       response.status(400).json({

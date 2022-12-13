@@ -33,7 +33,7 @@ const handleCommentInput = async (event) => {
         console.log(responseBody);
       } else {
         window.alert("Your message sent successfully");
-        window.location = "/blog.html";
+        window.location = "/blog";
       }
     } catch (err) {
       res.status(400).json({
