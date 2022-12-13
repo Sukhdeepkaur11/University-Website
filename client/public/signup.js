@@ -84,13 +84,6 @@ const validateSignup = (formValue) => {
 
   return true;
 };
-// const resetFunc = () => {
-//   document.getElementById("name").reset();
-//   formValue.empId == "";
-//   formValue.email == "";
-//   formValue.pass1 == "";
-//   formValue.pass2 == "";
-// };
 
 const signupButton = document.getElementById("signupBtn");
 signupButton.addEventListener("click", handelSignup);

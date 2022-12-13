@@ -115,7 +115,7 @@ app.post("/contact", async (req, res) => {
 //LOGIN ROUTES
 app.get("/login", (req, res) => {
   console.log("accessing route /login, METHOD = GET");
-  res.sendFile(path.join(__dirname, "login.html"));
+  res.sendFile(path.join(__dirname, "client/login.html"));
 });
 
 app.post("/login", async (req, res) => {
