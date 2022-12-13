@@ -38,7 +38,7 @@ const handelSignup = async (event) => {
         const responseBody = await response.json();
         console.log(responseBody);
       } else {
-        window.location = "/login.html";
+        window.location = "/login";
       }
     } catch (err) {
       res.status(400).json({

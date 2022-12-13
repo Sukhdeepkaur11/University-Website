@@ -21,9 +21,9 @@ const login = async (event) => {
 
   if (response.status === 200) {
     if (isTeacher) {
-      window.location = "/loginstaff.html";
+      window.location = "/loginstaff";
     } else {
-      window.location = "/loginstaff2.html";
+      window.location = "/loginstaff2";
     }
   } else {
     window.alert("Incorrect login details. Please try again");
