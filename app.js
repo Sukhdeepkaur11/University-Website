@@ -38,19 +38,19 @@ app.use(bodyParser.json()); // we want to use body-parses as a middelware
 app.get("/", (req, res) => {
   console.log("accessing route /, METHOD = GET");
   // __dirname, is a nodejs built in variable representing the current directory where code is ran
-  res.sendFile(path.join(__dirname, "index.html")); // responding to a request with a file
+  res.sendFile(path.join(__dirname, "client/index.html")); // responding to a request with a file
 });
 
 app.get("/about", (req, res) => {
   console.log("accessing route /, METHOD = GET");
   // __dirname, is a nodejs built in variable representing the current directory where code is ran
-  res.sendFile(path.join(__dirname, "about.html")); // responding to a request with a file
+  res.sendFile(path.join(__dirname, "client/about.html")); // responding to a request with a file
 });
 
 app.get("/course", (req, res) => {
   console.log("accessing route /, METHOD = GET");
   // __dirname, is a nodejs built in variable representing the current directory where code is ran
-  res.sendFile(path.join(__dirname, "course.html")); // responding to a request with a file
+  res.sendFile(path.join(__dirname, "client/course.html")); // responding to a request with a file
 });
 
 app.get("/loginstaff", (req, res) => {
@@ -58,7 +58,7 @@ app.get("/loginstaff", (req, res) => {
   //const cookies = req.cookies;
   //console.log(cookies);
   // __dirname, is a nodejs built in variable representing the current directory where code is ran
-  res.sendFile(path.join(__dirname, "loginstaff.html")); // responding to a request with a file
+  res.sendFile(path.join(__dirname, "client/loginstaff.html")); // responding to a request with a file
 });
 
 app.get("/loginstaff2", (req, res) => {
@@ -66,14 +66,14 @@ app.get("/loginstaff2", (req, res) => {
   //const cookies = req.cookies;
   //console.log(cookies);
   // __dirname, is a nodejs built in variable representing the current directory where code is ran
-  res.sendFile(path.join(__dirname, "loginstaff2.html")); // responding to a request with a file
+  res.sendFile(path.join(__dirname, "client/loginstaff2.html")); // responding to a request with a file
 });
 
 //BLOG ROUTES
 app.get("/blog", (req, res) => {
   console.log("accessing route /, METHOD = GET");
   // __dirname, is a nodejs built in variable representing the current directory where code is ran
-  res.sendFile(path.join(__dirname, "blog.html")); // responding to a request with a file
+  res.sendFile(path.join(__dirname, "client/blog.html")); // responding to a request with a file
 });
 app.post("/blog", async (req, res) => {
   console.log("we got new message");
@@ -94,7 +94,7 @@ app.post("/blog", async (req, res) => {
 app.get("/contact", (req, res) => {
   console.log("accessing route /, METHOD = GET");
   // __dirname, is a nodejs built in variable representing the current directory where code is ran
-  res.sendFile(path.join(__dirname, "contact.html")); // responding to a request with a file
+  res.sendFile(path.join(__dirname, "client/contact.html")); // responding to a request with a file
 });
 app.post("/contact", async (req, res) => {
   console.log("we got new message");
@@ -156,7 +156,7 @@ app.post("/login", async (req, res) => {
 
 //SIGNUP ROUTES
 app.get("/signup", (req, res) => {
-  res.sendFile(path.join(__dirname, "signup.html"));
+  res.sendFile(path.join(__dirname, "client/signup.html"));
 });
 app.post("/signup", async (req, res) => {
   console.log("we got new user");
