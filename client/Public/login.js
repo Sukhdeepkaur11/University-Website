@@ -23,8 +23,7 @@ const login = async (event) => {
     if (isTeacher) {
       window.location = "/loginstaff.html";
     } else {
-      window.alert("Incorrect login details. Please try again");
-      //window.location = "/login.html";
+      window.location = "/loginstaff2.html";
     }
   } else {
     window.alert("Incorrect login details. Please try again");

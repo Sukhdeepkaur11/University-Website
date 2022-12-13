@@ -9,7 +9,7 @@ const UserSchema = new Schema({
     //unique: true,
   },
   password: String,
-  IsTeacher: {
+  isTeacher: {
     type: Boolean,
     default: false,
   },
